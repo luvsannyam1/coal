@@ -10,6 +10,8 @@ import {
 } from "@/components/data/data";
 
 import Logo from "@/public/images/OIP.jpg";
+import VIP from "@/public/images/crown.png";
+import StockMarketGraph from "@/components/graph";
 
 export default function CoalMarketPage() {
   const tabs = [
@@ -192,6 +194,7 @@ export default function CoalMarketPage() {
             <h3 className="text-3xl font-semibold text-amber-500 mb-6">
               {selectedProduct.name}
             </h3>
+            <StockMarketGraph />
             <p className="text-lg text-gray-300 leading-relaxed mb-6">
               {selectedProduct.description}
             </p>
@@ -251,11 +254,18 @@ export default function CoalMarketPage() {
                       alt="Secondary illustration"
                     />
                     <div className="ml-5">
-                      <h5 className="text-lg font-semibold text-amber-400">
+                      <h5 className="text-lg font-semibold text-amber-400 flex">
                         {company.name}
                         {company.vip && (
-                          <span className="ml-5 bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-                            VIP
+                          <span className="ml-5 bg-green-100 text-green-800  font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 w-33 flex">
+                            <Image
+                              className="md:max-w-none mr-3"
+                              src={VIP}
+                              width={18}
+                              height={18}
+                              alt="VIP crown"
+                            />
+                            PREMIUM
                           </span>
                         )}
                       </h5>
@@ -426,10 +436,16 @@ export default function CoalMarketPage() {
               <div className="ml-5">
                 <h5 className="text-lg font-semibold text-amber-400">
                   {selectedCompany?.name}
-
                   {selectedCompany?.vip && (
-                    <span className="ml-5 bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-                      VIP
+                    <span className="bg-green-100 text-green-800  font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 w-30 flex text-xs">
+                      <Image
+                        className="md:max-w-none mr-3"
+                        src={VIP}
+                        width={18}
+                        height={18}
+                        alt="VIP crown"
+                      />
+                      PREMIUM
                     </span>
                   )}
                 </h5>
