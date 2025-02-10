@@ -3,279 +3,21 @@
 import Popup from "@/components/popup";
 import { useState } from "react";
 import Image from "next/image";
+import {
+  coalProducts,
+  deliveryCompanies,
+  coalSpecs,
+} from "@/components/data/data";
 
 import Logo from "@/public/images/OIP.jpg";
 
-const coalProducts = [
-  {
-    name: "Premium Anthracite Coal",
-    description:
-      "High-grade anthracite with low ash content, ideal for industrial applications.",
-    price: "Starting from $150/ton",
-    companies: [
-      {
-        name: "Global Coal Ltd.",
-        location: "New York, USA",
-        latitude: 40.7128,
-        longitude: -74.006,
-        contact: "contact@globalcoal.com",
-        reserve: "200,000 tons",
-      },
-      {
-        name: "Industrial Fuels Inc.",
-        location: "Hamburg, Germany",
-        latitude: 53.5511,
-        longitude: 9.9937,
-        contact: "info@industrialfuels.de",
-        reserve: "150,000 tons",
-      },
-    ],
-  },
-  {
-    name: "Bituminous Coal",
-    description:
-      "Versatile coal with high energy output, suitable for power generation.",
-    price: "Starting from $120/ton",
-    companies: [
-      {
-        name: "PowerGen Coals",
-        location: "Sydney, Australia",
-        latitude: -33.8688,
-        longitude: 151.2093,
-        contact: "sales@powergencoals.au",
-        reserve: "300,000 tons",
-      },
-      {
-        name: "Energy Solutions",
-        location: "London, UK",
-        latitude: 51.5074,
-        longitude: -0.1278,
-        contact: "info@energysolutions.co.uk",
-        reserve: "250,000 tons",
-      },
-    ],
-  },
-  {
-    name: "Lignite Coal",
-    description: "Cost-effective coal for heating and power plants.",
-    price: "Starting from $90/ton",
-    companies: [
-      {
-        name: "EcoHeat Supplies",
-        location: "Vancouver, Canada",
-        latitude: 49.2827,
-        longitude: -123.1207,
-        contact: "support@ecoheat.ca",
-        reserve: "100,000 tons",
-      },
-      {
-        name: "Budget Fuels",
-        location: "Cape Town, South Africa",
-        latitude: -33.9249,
-        longitude: 18.4241,
-        contact: "sales@budgetfuels.co.za",
-        reserve: "80,000 tons",
-      },
-    ],
-  },
-  {
-    name: "Coking Coal",
-    description:
-      "Essential for steel production, offering high carbon content.",
-    price: "Starting from $180/ton",
-    companies: [
-      {
-        name: "SteelMakers Resources",
-        location: "Pittsburgh, USA",
-        latitude: 40.4406,
-        longitude: -79.9959,
-        contact: "info@steelmakers.com",
-        reserve: "500,000 tons",
-      },
-      {
-        name: "CarbonTech",
-        location: "Tokyo, Japan",
-        latitude: 35.6895,
-        longitude: 139.6917,
-        contact: "contact@carbontech.jp",
-        reserve: "450,000 tons",
-      },
-    ],
-  },
-  {
-    name: "Peat Coal",
-    description: "Eco-friendly option with moderate heating value.",
-    price: "Starting from $70/ton",
-    companies: [
-      {
-        name: "Green Fuels",
-        location: "Oslo, Norway",
-        latitude: 59.9139,
-        longitude: 10.7522,
-        contact: "sales@greenfuels.no",
-        reserve: "60,000 tons",
-      },
-      {
-        name: "Sustainable Energy Corp.",
-        location: "Dublin, Ireland",
-        latitude: 53.3498,
-        longitude: -6.2603,
-        contact: "info@sustainableenergy.ie",
-        reserve: "50,000 tons",
-      },
-    ],
-  },
-  {
-    name: "Sub-bituminous Coal",
-    description: "Lower sulfur content, great for reducing emissions.",
-    price: "Starting from $110/ton",
-    companies: [
-      {
-        name: "CleanBurn Coals",
-        location: "Denver, USA",
-        latitude: 39.7392,
-        longitude: -104.9903,
-        contact: "info@cleanburn.com",
-        reserve: "220,000 tons",
-      },
-      {
-        name: "LowEmissions Energy",
-        location: "Zurich, Switzerland",
-        latitude: 47.3769,
-        longitude: 8.5417,
-        contact: "contact@lowemissions.ch",
-        reserve: "210,000 tons",
-      },
-    ],
-  },
-];
-
-const deliveryCompanies = [
-  {
-    name: "FastTrack Logistics",
-    services: [
-      {
-        type: "Standard Delivery",
-        deliveryTime: "3-5 business days",
-        price: "$50/ton",
-      },
-      {
-        type: "Express Delivery",
-        deliveryTime: "1-2 business days",
-        price: "$80/ton",
-      },
-      {
-        type: "International Shipping",
-        deliveryTime: "7-10 business days",
-        price: "$150/ton",
-      },
-    ],
-    contact: "support@fasttracklogistics.com",
-    headquarters: "Atlanta, USA",
-  },
-  {
-    name: "Global Freight Solutions",
-    services: [
-      {
-        type: "Economy Shipping",
-        deliveryTime: "5-7 business days",
-        price: "$40/ton",
-      },
-      {
-        type: "Priority Freight",
-        deliveryTime: "2-3 business days",
-        price: "$70/ton",
-      },
-      {
-        type: "Overseas Cargo",
-        deliveryTime: "10-15 business days",
-        price: "$130/ton",
-      },
-    ],
-    contact: "info@globalfreight.com",
-    headquarters: "Rotterdam, Netherlands",
-  },
-  {
-    name: "EcoTransports",
-    services: [
-      {
-        type: "Green Delivery",
-        deliveryTime: "4-6 business days",
-        price: "$45/ton",
-      },
-      {
-        type: "Express Green Shipping",
-        deliveryTime: "2 business days",
-        price: "$75/ton",
-      },
-      {
-        type: "International Eco Shipping",
-        deliveryTime: "8-12 business days",
-        price: "$140/ton",
-      },
-    ],
-    contact: "contact@ecotransports.org",
-    headquarters: "Stockholm, Sweden",
-  },
-  {
-    name: "CargoMaster",
-    services: [
-      {
-        type: "Bulk Freight",
-        deliveryTime: "6-8 business days",
-        price: "$35/ton",
-      },
-      {
-        type: "Fast Bulk Delivery",
-        deliveryTime: "3-4 business days",
-        price: "$65/ton",
-      },
-      {
-        type: "Global Bulk Shipping",
-        deliveryTime: "12-16 business days",
-        price: "$120/ton",
-      },
-    ],
-    contact: "sales@cargomaster.com",
-    headquarters: "Shanghai, China",
-  },
-  {
-    name: "SwiftHaul",
-    services: [
-      {
-        type: "Same Day Delivery",
-        deliveryTime: "Same day",
-        price: "$100/ton",
-      },
-      {
-        type: "Next Day Shipping",
-        deliveryTime: "1 business day",
-        price: "$85/ton",
-      },
-      {
-        type: "International Expedited",
-        deliveryTime: "5-7 business days",
-        price: "$160/ton",
-      },
-    ],
-    contact: "info@swifthaul.net",
-    headquarters: "London, UK",
-  },
-];
-const data = [
-  { name: "Ash (dry basis, %)", value: "≤ 11%" },
-  { name: "Volatile Matter (dry basis, %)", value: "≤ 20.0%-28.0%" },
-  { name: "Sulfur content (dry basis, %)", value: "≤ 0.85%" },
-  { name: "Total Moisture (as received, %)", value: "≤ 10.0%" },
-  { name: "G index", value: "≥ 75.0" },
-  { name: "Mercury (Hgd)", value: "≤ 0.6 μg/g" },
-  { name: "Arsenic (Asd)", value: "≤ 80 μg/g" },
-  { name: "Phosphorus (Pd)", value: "≤ 0.15%" },
-  { name: "Chlorine (Cld)", value: "≤ 0.3%" },
-  { name: "Fluorine (Fd)", value: "≤ 200 μg/g" },
-];
-
 export default function CoalMarketPage() {
+  const tabs = [
+    { label: "Company Information" },
+    { label: "Coal Specification" },
+  ];
+  const [selectTab, setSelectedTab] = useState(0);
+
   const [selectedProduct, setSelectedProduct] = useState(coalProducts[0]);
   const [currentBid, setCurrentBid] = useState(
     parseInt(selectedProduct.price.replace(/[^0-9]/g, ""))
@@ -302,6 +44,10 @@ export default function CoalMarketPage() {
   );
   const [selectedDeliveryService, setSelectedDeliveryService] = useState(
     deliveryCompanies[0].services[0]
+  );
+
+  const [selectedCompany, setSelectedCompany] = useState<Company | undefined>(
+    undefined
   );
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -489,7 +235,13 @@ export default function CoalMarketPage() {
                   key={index}
                   className="p-4 bg-gray-900 rounded-xl border border-gray-700"
                 >
-                  <div className="flex">
+                  <div
+                    className="flex"
+                    onClick={() => {
+                      setSelectedCompany(company);
+                      setIsPopupOpen(true);
+                    }}
+                  >
                     <Image
                       className="md:max-w-none"
                       src={Logo}
@@ -633,11 +385,111 @@ export default function CoalMarketPage() {
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}
-        title=""
+        title="Product Specifications"
       >
-        <p className="mb-4">
-          This is a sample popup message. You can include any content here.
-        </p>
+        <div className="flex border-b border-gray-700">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setSelectedTab(index)}
+              className={`py-2 px-4 text-sm font-medium focus:outline-none ${
+                selectTab === index
+                  ? "border-b-2 border-amber-500 text-amber-500"
+                  : "text-gray-400 hover:text-gray-200"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+        {selectTab === 0 && (
+          <div>
+            <div
+              className="flex"
+              onClick={() => {
+                setIsPopupOpen(true);
+              }}
+            >
+              <Image
+                className="md:max-w-none"
+                src={Logo}
+                width={80}
+                height={80}
+                alt="Secondary illustration"
+              />
+              <div className="ml-5">
+                <h5 className="text-lg font-semibold text-amber-400">
+                  {selectedCompany?.name}
+                </h5>
+                <p className="text-gray-300">{selectedCompany?.location}</p>
+                <p className="text-gray-400 text-sm">
+                  Contact: {selectedCompany?.contact}
+                </p>
+              </div>
+            </div>
+            <p className="mt-5 text-sm">
+              Company Description:
+              <br /> Mongolian Mining Corporation (“MMC” or the “Company”; SEHK
+              Stock Code: 975) is a high-quality coking coal producer and
+              exporter in Mongolia. The Company owns and operates two open-pit
+              coking coal mines - Ukhaa Khudag and Baruun Naran, both located in
+              Umnugobi aimag of Mongolia. MMC’s operations have grown rapidly
+              from a green-field project in 2009 to a world-standard mining
+              complex to date. With its premium quality coal products,
+              international standard project development and effective
+              management practices, the Company has already secured its position
+              as the largest producer and exporter of washed coal in Mongolia.
+              In 2010, after only one year of fast-paced operations, the Company
+              was successfully listed on the main board of Hong Kong Stock
+              Exchange, making it the first Mongolian company to offer its
+              shares internationally. With integrated coal mining operations
+              combined with leading edge technologies, MMC was able to reach the
+              quickest ramp-up of mining operations in the country based on the
+              best international practices. Located adjacent to the Chinese
+              border and the target market region, MMC has a competitive cost
+              structure and a strategic advantage to compete at the world
+              market. While strengthening its position as a reliable supplier of
+              high-quality coking coal products and boosting its competitiveness
+              in the international market, MMC is successfully building a
+              fully-integrated coking coal mining, processing, transportation
+              and marketing platform.
+            </p>
+
+            <iframe
+              src={`https://www.google.com/maps?q=${selectedCompany.latitude},${selectedCompany.longitude}&hl=es;z=14&output=embed`}
+              width="100%"
+              height="300"
+              style={{ border: 0 }}
+              loading="lazy"
+            ></iframe>
+          </div>
+        )}
+        {selectTab === 1 && (
+          <table className="w-full text-sm text-left text-gray-200">
+            <thead className="text-xs uppercase bg-gray-700 text-gray-400">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  Parameter
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Value
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {coalSpecs.map((spec, index) => (
+                <tr
+                  key={index}
+                  className="bg-gray-800 border-b border-gray-700"
+                >
+                  <td className="px-6 py-4">{spec.name}</td>
+                  <td className="px-6 py-4">{spec.value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+
         <button
           onClick={() => setIsPopupOpen(false)}
           className="py-2 px-4 bg-green-500 text-gray-900 font-semibold rounded-xl"
