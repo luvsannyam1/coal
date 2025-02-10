@@ -13,7 +13,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center ">
       {/* Background overlay */}
       <div
         className="absolute inset-0 bg-black opacity-50"
@@ -32,7 +32,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose, title, children }) => {
           </button>
         </div>
         {/* Popup content */}
-        <div className="mt-4">{children}</div>
+        <div className="mt-4 overflow-y-scroll" style={{ maxHeight: "80vh" }}>
+          {children}
+        </div>
       </div>
     </div>
   );
