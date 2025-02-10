@@ -57,6 +57,7 @@ export default function CoalMarketPage() {
     location: string;
     latitude: number;
     longitude: number;
+    vip: boolean;
     contact: string;
     reserve: string;
   }
@@ -245,13 +246,18 @@ export default function CoalMarketPage() {
                     <Image
                       className="md:max-w-none"
                       src={Logo}
-                      width={80}
+                      width={86}
                       height={80}
                       alt="Secondary illustration"
                     />
                     <div className="ml-5">
                       <h5 className="text-lg font-semibold text-amber-400">
                         {company.name}
+                        {company.vip && (
+                          <span className="ml-5 bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                            VIP
+                          </span>
+                        )}
                       </h5>
                       <p className="text-gray-300">{company.location}</p>
                       <p className="text-gray-400 text-sm">
@@ -420,6 +426,12 @@ export default function CoalMarketPage() {
               <div className="ml-5">
                 <h5 className="text-lg font-semibold text-amber-400">
                   {selectedCompany?.name}
+
+                  {selectedCompany?.vip && (
+                    <span className="ml-5 bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                      VIP
+                    </span>
+                  )}
                 </h5>
                 <p className="text-gray-300">{selectedCompany?.location}</p>
                 <p className="text-gray-400 text-sm">
