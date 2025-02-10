@@ -1,6 +1,10 @@
 "use client";
 
+import Popup from "@/components/popup";
 import { useState } from "react";
+import Image from "next/image";
+
+import Logo from "@/public/images/OIP.jpg";
 
 const coalProducts = [
   {
@@ -258,6 +262,18 @@ const deliveryCompanies = [
     headquarters: "London, UK",
   },
 ];
+const data = [
+  { name: "Ash (dry basis, %)", value: "≤ 11%" },
+  { name: "Volatile Matter (dry basis, %)", value: "≤ 20.0%-28.0%" },
+  { name: "Sulfur content (dry basis, %)", value: "≤ 0.85%" },
+  { name: "Total Moisture (as received, %)", value: "≤ 10.0%" },
+  { name: "G index", value: "≥ 75.0" },
+  { name: "Mercury (Hgd)", value: "≤ 0.6 μg/g" },
+  { name: "Arsenic (Asd)", value: "≤ 80 μg/g" },
+  { name: "Phosphorus (Pd)", value: "≤ 0.15%" },
+  { name: "Chlorine (Cld)", value: "≤ 0.3%" },
+  { name: "Fluorine (Fd)", value: "≤ 200 μg/g" },
+];
 
 export default function CoalMarketPage() {
   const [selectedProduct, setSelectedProduct] = useState(coalProducts[0]);
@@ -287,6 +303,8 @@ export default function CoalMarketPage() {
   const [selectedDeliveryService, setSelectedDeliveryService] = useState(
     deliveryCompanies[0].services[0]
   );
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   interface Company {
     name: string;
@@ -461,55 +479,6 @@ export default function CoalMarketPage() {
               </button>
             </div>
 
-            {/* Delivery Options Section */}
-            <div className="mb-6">
-              <h4 className="text-2xl font-semibold text-gray-200 mb-2">
-                Delivery Options
-              </h4>
-              <div className="flex flex-col sm:flex-row sm:space-x-4">
-                {/* Delivery Company Selector */}
-                <div className="mb-3 sm:mb-0">
-                  <label className="block text-gray-300 mb-1">
-                    Delivery Company:
-                  </label>
-                  <select
-                    value={deliveryCompanies.findIndex(
-                      (comp) => comp.name === selectedDeliveryCompany.name
-                    )}
-                    onChange={handleDeliveryCompanyChange}
-                    className="p-2 rounded border border-gray-700 bg-gray-900 text-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                  >
-                    {deliveryCompanies.map((company, index) => (
-                      <option key={index} value={index}>
-                        {company.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Delivery Service Selector */}
-                <div>
-                  <label className="block text-gray-300 mb-1">
-                    Service Option:
-                  </label>
-                  <select
-                    value={selectedDeliveryCompany.services.findIndex(
-                      (srv) => srv.type === selectedDeliveryService.type
-                    )}
-                    onChange={handleDeliveryServiceChange}
-                    className="p-2 rounded border border-gray-700 bg-gray-900 text-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                  >
-                    {selectedDeliveryCompany.services.map((service, index) => (
-                      <option key={index} value={index}>
-                        {service.type} - {service.deliveryTime} -{" "}
-                        {service.price}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-
             {/* Companies Selling This Coal */}
             <h4 className="text-2xl font-semibold text-gray-200 mb-4">
               Available from:
@@ -520,16 +489,27 @@ export default function CoalMarketPage() {
                   key={index}
                   className="p-4 bg-gray-900 rounded-xl border border-gray-700"
                 >
-                  <h5 className="text-lg font-semibold text-amber-400">
-                    {company.name}
-                  </h5>
-                  <p className="text-gray-300">{company.location}</p>
-                  <p className="text-gray-400 text-sm">
-                    Contact: {company.contact}
-                  </p>
-                  <p className="text-gray-400 text-sm">
-                    Reserve: {company.reserve}
-                  </p>
+                  <div className="flex">
+                    <Image
+                      className="md:max-w-none"
+                      src={Logo}
+                      width={80}
+                      height={80}
+                      alt="Secondary illustration"
+                    />
+                    <div className="ml-5">
+                      <h5 className="text-lg font-semibold text-amber-400">
+                        {company.name}
+                      </h5>
+                      <p className="text-gray-300">{company.location}</p>
+                      <p className="text-gray-400 text-sm">
+                        Contact: {company.contact}
+                      </p>
+                      <p className="text-gray-400 text-sm">
+                        Reserve: {company.reserve}
+                      </p>
+                    </div>
+                  </div>
                   <div className="mt-3 flex items-center space-x-3">
                     <input
                       type="number"
@@ -546,6 +526,57 @@ export default function CoalMarketPage() {
                     >
                       Place Order
                     </button>
+                  </div>
+
+                  {/* Delivery Options Section */}
+                  <div className="mb-6 pt-2">
+                    <h4 className="text-l font-semibold text-gray-200 mb-2">
+                      Delivery Options
+                    </h4>
+                    <div className="flex flex-col sm:flex-row sm:space-x-4">
+                      {/* Delivery Company Selector */}
+                      <div className="mb-3 sm:mb-0">
+                        <label className="block text-gray-300 mb-1">
+                          2 Delivery Company:
+                        </label>
+                        <select
+                          value={deliveryCompanies.findIndex(
+                            (comp) => comp.name === selectedDeliveryCompany.name
+                          )}
+                          onChange={handleDeliveryCompanyChange}
+                          className="p-2 rounded border border-gray-700 bg-gray-900 text-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                        >
+                          {deliveryCompanies.map((company, index) => (
+                            <option key={index} value={index}>
+                              {company.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Delivery Service Selector */}
+                      <div>
+                        <label className="block text-gray-300 mb-1">
+                          Service Option:
+                        </label>
+                        <select
+                          value={selectedDeliveryCompany.services.findIndex(
+                            (srv) => srv.type === selectedDeliveryService.type
+                          )}
+                          onChange={handleDeliveryServiceChange}
+                          className="p-2 rounded border border-gray-700 bg-gray-900 text-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                        >
+                          {selectedDeliveryCompany.services.map(
+                            (service, index) => (
+                              <option key={index} value={index}>
+                                {service.type} - {service.deliveryTime} -{" "}
+                                {service.price}
+                              </option>
+                            )
+                          )}
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </li>
               ))}
@@ -591,6 +622,29 @@ export default function CoalMarketPage() {
           </div>
         </div>
       </div>
+      <button
+        onClick={() => setIsPopupOpen(true)}
+        className="py-2 px-4 bg-amber-500 text-gray-900 font-semibold rounded-xl"
+      >
+        Open Popup
+      </button>
+
+      {/* Popup Component */}
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        title=""
+      >
+        <p className="mb-4">
+          This is a sample popup message. You can include any content here.
+        </p>
+        <button
+          onClick={() => setIsPopupOpen(false)}
+          className="py-2 px-4 bg-green-500 text-gray-900 font-semibold rounded-xl"
+        >
+          Close
+        </button>
+      </Popup>
     </section>
   );
 }

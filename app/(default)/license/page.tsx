@@ -12,7 +12,6 @@ const contracts = [
     elements: [
       {
         elementName: "Neodymium",
-        capacity: "278,500kg",
       },
       {
         elementName: "Praseodymium",

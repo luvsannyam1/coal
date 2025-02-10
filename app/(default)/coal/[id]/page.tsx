@@ -75,7 +75,7 @@ export default function CoalDetails() {
   const [currentBid, setCurrentBid] = useState(selectedContract.startingPrice);
   const [bidInput, setBidInput] = useState("");
 
-  const handleContractSelect = (contract) => {
+  const handleContractSelect = (contract: typeof contracts[0]) => {
     setSelectedContract(contract);
     setCurrentBid(contract.startingPrice);
     setBidInput("");
