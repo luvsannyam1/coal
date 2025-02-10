@@ -456,7 +456,7 @@ export default function CoalMarketPage() {
             </p>
 
             <iframe
-              src={`https://www.google.com/maps?q=${selectedCompany.latitude},${selectedCompany.longitude}&hl=es;z=14&output=embed`}
+              src={`https://www.google.com/maps?q=${selectedCompany?.latitude},${selectedCompany?.longitude}&hl=es;z=14&output=embed`}
               width="100%"
               height="300"
               style={{ border: 0 }}
