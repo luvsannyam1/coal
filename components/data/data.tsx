@@ -278,3 +278,104 @@ export const coalSpecs = [
   { name: "Chlorine (Cld)", value: "≤ 0.3%" },
   { name: "Fluorine (Fd)", value: "≤ 200 μg/g" },
 ];
+
+export const contracts = [
+  {
+    id: 1,
+    title: "Khalzan burgedei",
+    description: "A rare earth minerals extraction site with diverse elements.",
+    details:
+      "This site is licensed under MV-006911 and owned by Mongolian national rear earth Corp. It features significant deposits of Neodymium, Praseodymium, Dysprosium, and Terbium.",
+    startingPrice: 50000,
+    elements: [
+      {
+        elementName: "Neodymium",
+      },
+      {
+        elementName: "Praseodymium",
+        capacity: "82,300kg",
+      },
+      {
+        elementName: "Dysprosium",
+        capacity: "13,750kg",
+      },
+      {
+        elementName: "Terbium",
+        capacity: "1,520kg",
+      },
+    ],
+    location: {
+      longitude: 91.5654,
+      latitude: 48.5012,
+    },
+    evaluations: [],
+    experts: [
+      {
+        evaluationCost: "3000$",
+        evaluatorName: "Big Bag Mo LLC",
+        contractor: false,
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Shivee-Ovoo",
+    description: "A coal mining site with extensive reserves.",
+    details:
+      "This site is licensed under MV-009876 and owned by Shivee-Ovoo LLC. It is known for its high-quality coal deposits and efficient extraction processes.",
+    startingPrice: 30000,
+    elements: [
+      {
+        elementName: "Coal",
+        capacity: "500,000kg",
+      },
+    ],
+    location: {
+      longitude: 108.7611,
+      latitude: 44.3857,
+    },
+    evaluations: [],
+    experts: [
+      {
+        evaluationCost: "3000$",
+        evaluatorName: "Big Bag Mo LLC",
+        contractor: false,
+        vip: true,
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Tavan tolgoi",
+    description: "One of the largest coking coal deposits in the region.",
+    details:
+      "This site is licensed under MV-004321 and owned by Energy Resources LLC. It supplies premium-grade coking coal to various industries.",
+    startingPrice: 75000,
+    elements: [
+      {
+        elementName: "Coking Coal",
+        capacity: "1,200,000kg",
+      },
+    ],
+    location: {
+      longitude: 106.0884,
+      latitude: 43.5981,
+    },
+    evaluations: [
+      {
+        evaluationCost: "3000$",
+        evaluatorName: "Big Bag Mo LLC",
+        contractor: false,
+        vip: true,
+      },
+    ],
+    experts: [
+      {
+        evaluationCost: "3000$",
+        evaluatorName: "Big Bag Mo LLC",
+        contractor: false,
+        vip: true,
+      },
+    ],
+  },
+];
